@@ -214,17 +214,27 @@ __________________________.
 Exemplo python:"""
 import random
 import time
+#variaveis de memória
 mem = {}
 memg = {}
+#taxa de aprendizado
 ta = 0.1
+#valor de ativação memória para neurônio
 vamn = 1
+#valor de ativação dp neurônio
 van = 1
+#valor de ativação entrada
 vae = 1
+#valor neurônio
 vn = random.randint(0,9)
+#valor atual do neurônio
 vna = 0
+#erro
 err = 0
+#tentativas
 tenta = 0
 def treinocelula(mem,memg,vamn,van,vae,ent,vn,vna,err,ta,tenta):
+ #validando entradas
     if ent is None:
         vae = 0
         vamn = 0
@@ -237,8 +247,10 @@ def treinocelula(mem,memg,vamn,van,vae,ent,vn,vna,err,ta,tenta):
     else:
         vae = 1
         vamn = 1
+     #porta AND
     if vae == 1 and vamn == 1:
         van = 1
+     #cálculos de aproximação
     if van == 1:
         err = ent - vn
         vna = max(-1,min(1,err * ta))
@@ -251,6 +263,7 @@ def treinocelula(mem,memg,vamn,van,vae,ent,vn,vna,err,ta,tenta):
                 if ent in mem:
                     memg[ent] = vn
     return mem,memg,vamn,van,vae,ent,vn,vna,err,ta,tenta
+#loop
 while True:
     tenta = 0
     try:
