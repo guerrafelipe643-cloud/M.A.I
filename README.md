@@ -1,5 +1,5 @@
 # =============================================================================
-#   MAI - Memory Architecture for AI (Arquitetura Modular para IA)
+#   MAI - Memory Architecture for AI (Arquitetura de memória para IA)
 #   Copyright (C) 2026  Felipe Guerra Rodrigues Athaydes
 #
 #   Este programa é um software livre: você pode redistribuí-lo e/ou modificá-lo
