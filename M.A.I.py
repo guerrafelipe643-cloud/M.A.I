@@ -159,7 +159,7 @@ Recuperação: 937 ns
 Recuperação: 886 ns
 Recuperação: 886 ns
 Recuperação: 886 ns
-R
+
 
 {Feito em um redimi note 13 4G}
 ) em absolutamente todas as respostas, é um algoritmo totalmente modular e baseado no funcionamento do corpo humano misturado com algoritmos antigos, apesar disso nos testes realizados, a MAI apresentou desempenho superior a modelos neurais tradicionais em tarefas de memorização e recuperação de padrões previamente aprendidos. todavia acaba perdendo muito em capacidade de raciocínio.
