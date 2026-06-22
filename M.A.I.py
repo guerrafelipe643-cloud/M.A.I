@@ -24,7 +24,7 @@ class ND:
         self.mem = {}
         self.memg = {}
         self.ta = 0.1
-        self.vn = random.randint(0,9)
+        self.vn = 0
         self.tenta = 0
     def detectar(self, ent):
         if ent in self.mem:
@@ -44,10 +44,10 @@ class ND:
         vn = round(vn)
         if vn == entrada:
             self.mem[entrada] = vn
-            if entrada in self.mem:         
+            if entrada in self.mem:          # isto sempre será verdade, pode só self.memg[entrada] = vn
                 self.memg[entrada] = vn
-            self.vn = vn                     
-        self.tenta = tenta                   
+            self.vn = vn                     # atualiza o valor do neurônio
+        self.tenta = tenta                   # opcional: guarda quantas tentativas levou
 class NP:
     def __init__(self, name):
         self.name = name
