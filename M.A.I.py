@@ -1,5 +1,6 @@
-# ===============================================================================
-#   MAI - Memory Architecture for AI (Arquitetura de memória para IA)
+
+# =============================================================================
+#   MAI - Memory Architecture for AI (Arquitetura Modular para IA)
 #   Copyright (C) 2026  Felipe Guerra Rodrigues Athaydes
 #
 #   Este programa é um software livre: você pode redistribuí-lo e/ou modificá-lo
@@ -15,291 +16,156 @@
 #   Você deve ter recebido uma cópia da Licença Pública Geral GNU junto com
 #   este programa. Se não, veja <https://gnu.org>.
 # ==============================================================================
-"""
-Parte 1
-O algoritmo consiste em uma IA totalmente focada em memorização, após um treino longo chega a ter latência baixa mesmo após 200 informações guardadas(dados do teste:
- Recuperação: 2917 ns
-Recuperação: 1666 ns
-Recuperação: 1042 ns
-Recuperação: 990 ns
-Recuperação: 886 ns
-Recuperação: 886 ns
-Recuperação: 937 ns
-Recuperação: 885 ns
-Recuperação: 834 ns
-Recuperação: 886 ns
-Recuperação: 2396 ns
-Recuperação: 1042 ns
-Recuperação: 938 ns
-Recuperação: 885 ns
-Recuperação: 886 ns
-Recuperação: 886 ns
-Recuperação: 885 ns
-Recuperação: 938 ns
-Recuperação: 886 ns
-Recuperação: 885 ns
-Recuperação: 886 ns
-Recuperação: 886 ns
-Recuperação: 886 ns
-Recuperação: 937 ns
-Recuperação: 886 ns
-Recuperação: 885 ns
-Recuperação: 886 ns
-Recuperação: 886 ns
-Recuperação: 834 ns
-Recuperação: 938 ns
-Recuperação: 833 ns
-Recuperação: 885 ns
-Recuperação: 937 ns
-Recuperação: 938 ns
-Recuperação: 938 ns
-Recuperação: 886 ns
-Recuperação: 886 ns
-Recuperação: 886 ns
-Recuperação: 886 ns
-Recuperação: 938 ns
-Recuperação: 886 ns
-Recuperação: 886 ns
-Recuperação: 937 ns
-Recuperação: 885 ns
-Recuperação: 885 ns
-Recuperação: 885 ns
-Recuperação: 990 ns
-Recuperação: 833 ns
-Recuperação: 885 ns
-Recuperação: 885 ns
-Recuperação: 937 ns
-Recuperação: 886 ns
-Recuperação: 938 ns
-Recuperação: 937 ns
-Recuperação: 885 ns
-Recuperação: 885 ns
-Recuperação: 885 ns
-Recuperação: 833 ns
-Recuperação: 1354 ns
-Recuperação: 990 ns
-Recuperação: 886 ns
-Recuperação: 834 ns
-Recuperação: 885 ns
-Recuperação: 886 ns
-Recuperação: 885 ns
-Recuperação: 833 ns
-Recuperação: 886 ns
-Recuperação: 885 ns
-Recuperação: 833 ns
-Recuperação: 886 ns
-Recuperação: 833 ns
-Recuperação: 886 ns
-Recuperação: 834 ns
-Recuperação: 937 ns
-Recuperação: 833 ns
-Recuperação: 886 ns
-Recuperação: 885 ns
-Recuperação: 834 ns
-Recuperação: 886 ns
-Recuperação: 886 ns
-Recuperação: 833 ns
-Recuperação: 886 ns
-Recuperação: 833 ns
-Recuperação: 886 ns
-Recuperação: 885 ns
-Recuperação: 886 ns
-Recuperação: 885 ns
-Recuperação: 886 ns
-Recuperação: 886 ns
-Recuperação: 885 ns
-Recuperação: 885 ns
-Recuperação: 834 ns
-Recuperação: 885 ns
-Recuperação: 834 ns
-Recuperação: 833 ns
-Recuperação: 834 ns
-Recuperação: 833 ns
-Recuperação: 885 ns
-Recuperação: 833 ns
-Recuperação: 885 ns
-Recuperação: 833 ns
-Recuperação: 886 ns
-Recuperação: 938 ns
-Recuperação: 833 ns
-Recuperação: 938 ns
-Recuperação: 938 ns
-Recuperação: 833 ns
-Recuperação: 886 ns
-Recuperação: 885 ns
-Recuperação: 885 ns
-Recuperação: 937 ns
-Recuperação: 886 ns
-Recuperação: 833 ns
-Recuperação: 833 ns
-Recuperação: 833 ns
-Recuperação: 833 ns
-Recuperação: 885 ns
-Recuperação: 833 ns
-Recuperação: 833 ns
-Recuperação: 886 ns
-Recuperação: 833 ns
-Recuperação: 938 ns
-Recuperação: 834 ns
-Recuperação: 1458 ns
-Recuperação: 990 ns
-Recuperação: 937 ns
-Recuperação: 937 ns
-Recuperação: 886 ns
-Recuperação: 937 ns
-Recuperação: 938 ns
-Recuperação: 886 ns
-Recuperação: 833 ns
-Recuperação: 886 ns
-Recuperação: 938 ns
-Recuperação: 937 ns
-Recuperação: 937 ns
-Recuperação: 833 ns
-Recuperação: 937 ns
-Recuperação: 886 ns
-Recuperação: 886 ns
-Recuperação: 886 ns
-
-
-{Feito em um redimi note 13 4G}
-) em absolutamente todas as respostas, é um algoritmo totalmente modular e baseado no funcionamento do corpo humano misturado com algoritmos antigos, apesar disso nos testes realizados, a MAI apresentou desempenho superior a modelos neurais tradicionais em tarefas de memorização e recuperação de padrões previamente aprendidos. todavia acaba perdendo muito em capacidade de raciocínio.
-Parte 2
-Organização modular / hierarquia:
-Células
-Tecidos 
-Sistemas 
-________________________________.
-Organização por neurônios:
-Nd: neurônio de dígito: usa apenas um carácter 
-Np: neurônio de palavra: usa só uma palavra
-Ns: neurônio de sintaxe: organiza as palavras 
-________________________________.
-Explicações:
-Células: conjunto básico e mínimo formado por apenas um ND
-Tecido: conjunto de mínimo de organização entre um ND, um np e um ns
-Sistema: conjunto mínimo e básico da IA completa
-_______________________________.
-Base descompactada:
-Cada neurônio tem sua memória isolada, que representa a capacidade de armazenamento e o armazenamento dele, basicamente cada neurônio acaba tendo uma porta and com as entradas sendo: ent(entrada normal se ela existe uma entrada da porta and = 1) e memória (se ent está na memória a outra entrada é = 0 e puxa o resultado diretamente da memória), se a porta and ativar sendo 1,1 a saída= 1, o neurônio acaba ativando (obs: essa base vale para apenas para ND)
-________________________.
-Cálculos de um ND isolado:
-Variáveis mínimas:
-Mem: (memória interna)
-Memg: (memória global)
-Err: (erro)
-Ta: (taxa de aprendizagem)
-VN: (valor do neurônio)
-VNA: (valor atual do neurônio)
-VAN: (valor de ativação do neurônio)
-VAMN: (valor de ativação da memória → neurônio(
-VAE: (valor de ativação entrada)
-Ent: (entrada)
-↓
-Cálculos mínimos:
-Cálculo do erro: ERR = ENT - VN
-Cálculo do ajuste: VNA = (mínimo: -1, máximo: 1)TA . ERR
-Cálculo de soma: VN = VN + VNA
-Cálculo de busca memória: se ENT está na memória: VN = MEM(ENT)
-_______________________________.
-Cada neurônio restante exemplo np e na tem um funcionamento praticamente igual ao ND porém mais otimizado para sua função por isso não falei deles.
-_____________________________.
-Testes mentais:
-Se os ND's souberem o valor de cada algarismo como vai estar salvo em Mem eles vão conseguir copiar qualquer número com latência quase 0
-____________________________.
-O funcionamento da IA se baseia apenas nos ND sendo os NP e NS apenas acessórios para caso alguém queira implementar raciocínio(muito mal otimizada para isso)
-__________________________.
-Usos: detectar padrões e demonstra-los, exemplo: comportamento de animais
-Implantação em aceleradores de partículas para descobrir novos átomos
-__________________________.
-Exemplo python:"""
-import random
+# MAI 0.5 / SISTEMA 
+import random, string
 import time
-#variaveis de memória
-mem = {}
-memg = {}
-#taxa de aprendizado
-ta = 0.1
-#valor de ativação memória para neurônio
-vamn = 1
-#valor de ativação dp neurônio
-van = 1
-#valor de ativação entrada
-vae = 1
-#valor neurônio
-vn = random.randint(0,9)
-#valor atual do neurônio
-vna = 0
-#erro
-err = 0
-#tentativas
-tenta = 0
-def treinocelula(mem,memg,vamn,van,vae,ent,vn,vna,err,ta,tenta):
- #validando entradas
-    if ent is None:
-        vae = 0
-        vamn = 0
-    else:
-        vae = 1
-    if ent in mem and vae == 1:
-        vamn = 0
-        vae = 1
-        vna = mem[ent]
-    else:
-        vae = 1
-        vamn = 1
-     #porta AND
-    if vae == 1 and vamn == 1:
-        van = 1
-     #cálculos de aproximação
-    if van == 1:
-        err = ent - vn
-        vna = max(-1,min(1,err * ta))
-        vn = vn + vna
-        tenta += 1
-        if abs(err) < 1e-2 or tenta > 1e8:
-            vn = round(vn)
-            if vn == ent:
-                mem[ent] = vn
-                if ent in mem:
-                    memg[ent] = vn
-    return mem,memg,vamn,van,vae,ent,vn,vna,err,ta,tenta
-#loop
+class ND:
+    def __init__(self, name):
+        self.name = name
+        self.mem = {}
+        self.memg = {}
+        self.ta = 0.1
+        self.vn = random.randint(0,9)
+        self.tenta = 0
+    def detectar(self, ent):
+        if ent in self.mem:
+            return self.mem[ent], "Conhecido"
+        else:
+            return None, "Novo"
+    def aprender(self, entrada):
+        tenta = 0
+        vn = self.vn  # começa com o valor atual do neurônio
+        while True:
+            err = entrada - vn           # recalcula o erro a cada iteração
+            if abs(err) < 1e-2 or tenta > 1e8:   # condição de parada
+                break
+            vna = max(-1, min(1, err * self.ta))
+            vn += vna
+            tenta += 1
+        vn = round(vn)
+        if vn == entrada:
+            self.mem[entrada] = vn
+            if entrada in self.mem:          # isto sempre será verdade, pode só self.memg[entrada] = vn
+                self.memg[entrada] = vn
+            self.vn = vn                     # atualiza o valor do neurônio
+        self.tenta = tenta                   # opcional: guarda quantas tentativas levou
+class NP:
+    def __init__(self, name):
+        self.name = name
+        self.mem = {}
+    def comparar(self, ents):
+        if ents in self.mem:
+            return "Conhecido"
+        else:
+            self.mem[ents] = ents
+            return "Novo! e salvo!"
+class NS:
+    def __init__(self, name):
+        self.name = name
+        self.mem = {}
+    def comparar(self, ents):
+        if ents in self.mem:
+            return "Padrão geral: Conhecido"
+        else:
+            self.mem[ents] = ents
+            return "Padrão geral: Novo e aprendido"
+ciclo = 0
 while True:
-    tenta = 0
+    
+    ciclo = 0
+    nds = []
+    print("=================:MENU M.A.I:=================")
+    print("Selecione a opção desejada: ")
+    print("1 para sair")
+    print("2 para treinamento")
     try:
-        ent = int(input("Digite uma entrada: "))
-        ta = float(input("digite a taxa de aprendizado: "))
+        opcao = int(input(":   "))
     except ValueError:
-        print("digite somente números")
-        continue
-    while True:
-        mem,memg,vamn,van,vae,ent,vn,vna,err,ta,tenta = treinocelula(mem,memg,vamn,van,vae,ent,vn,vna,err,ta,tenta)
-        if abs(err) < 1e-3 or tenta > 1e8:
-            print(f"valor neuronio: {vn}")
-            print(f"memória: {mem}")
-            print(f"tentativas: {tenta}")
-            break
-""""
-_______________________________.
-Para impedir explosões pode-se definir um máximo e um mínimo do erro e tentativas, para impedir bugs de processamento Mem já vem com o algarismo 0 incluído para não zerar VN e entrar em um ciclo infinito.
-______________________________.
-Cada memória tem um filtro se algo já salvo está na memória nada novo é adicionado pois não passa pelo cálculo do neurônio
-_____________________________.
-Sistema de interligação por ND:
-Cada ND pode cuidar de um carácter e as saídas irão convergir em uma palavra na ordem crescente, cada neurônio vai ter um ID escondido/abstrato que funcionará na ordem exemplo neurônio 1 - 100 na ordem, para impedir erros custará muito processamento mas cada np terá acesso a todos os ND, para não bagunçar tudo ele só pegará uma palavra exemplo: (oi), isso custa 2 ND mas tem 100 ND, como é uma frase pela própria mente humana as palavras são separadas por espaços, ele detectara algo entre 2 espaços e irá corrigir a palavra gerada pelos ND's
-_______________________________.
-Np funcionamento:
-Cada np funciona como uma "via", que conecta todos os np's do código, consequentemente isso afetaria a organização, por isso ele detectara uma coisa presente em toda forma de linguagem da terra os espaços, e as letras entre dois espaços seriam uma palavra, consequentemente cada np organizaria a saída dos np's conectados a ele, cada np também tem as mesmas váriaveis de um ND somente as entradas e os cálculos são diferentes, exemplo:
+        print("Digite somente números")
+    if opcao == 1:
+        break
+    if opcao == 2:
+        nps = []
+        use = input("Você deseja usar NP?: ").lower()
+            
+        if "s" in use:
+            num = int(input("Quantos nds cada NP deve agrupar? "))
+        print("Digite o tipo de entrada: ")
+        try:
+            opcao1 = int(input("1 para entrada aleatória    |    2 para entrada digitada: "))
+        except ValueError:
+            continue
+        print("")
+        try:
+            numerociclos = int(input("Digite o número de ciclos: "))
+        except ValueError:
+            continue
+        print("")
+        try:
+            tempo = float(input("Digite o tempo entre cada ciclo: "))
+        except ValueError:
+            continue
+        print("")
+        try:
+            numerond = int(input("Digite o número de ND's: "))
+        except ValueError:
+            continue
+        numnp = numerond // num
+        for i in range(numnp):
+            nps.append(NP(f"np.{i}"))
+        for i in range(numerond):
+            nds.append(ND(f"nd.{i}"))
+        ns = NS("NS")
+        print(f"{len(nds)} nds criados!")
+        resultados = []
+        memoriaglobal = []
+        ciclo = 0
+        valores_nds = []
+        while ciclo < numerociclos:
+            resultado = []
+            resultadotodo = []
+            valores_nds = []
+            conhecidosn = 0
+            resultados = []
+            if opcao1 == 1:
+                text = "".join(random.choices(string.ascii_letters + string.digits, k=len(nds)))
+            if opcao1 == 2:
+                text = input("Digite a entrada: ")
+            if len(text) > len(nds):
+                print(f"Muitos caracteres!, o texto tem {len(text)} caracteres, o máximo é {len(nds)}!")
+                continue
+            inicio1 = time.perf_counter_ns()
+            for i, char in enumerate(text):
+                if char.isdigit():
+                    ent = int(char)
+                else:
+                    ent = ord(char)
+                nd = nds[i]
+                inicio = time.perf_counter_ns()
+                valor,status = nd.detectar(ent)
+                fim = time.perf_counter_ns()
+                print(f"latência de detecção: {fim-inicio} ns")
+                if status == "Novo":
+                    inicio2 = time.perf_counter_ns()
+                    nd.aprender(ent)
+                    fim2 = time.perf_counter_ns()
+                    print(f"latência de cáculo do {nd.name}: {fim2-inicio2} ns")
+                    print(f"memória atual: {nd.mem}")
+                else:
+                    conhecidosn += 1
+                valores_nds.append(nd.vn)
 
+            for i, np in enumerate(nps):
+                inicio = i * num
+                fim = inicio + num
+                ents = tuple(valores_nds[inicio:fim])
+                resultadotodo.append(np.comparar(ents))
+            compreensaogeral = ns.comparar(tuple(valores_nds))
+            fim1 = time.perf_counter_ns()
+            print(f"latência total: {fim1-inicio1} ns")
+            print(f'número de conhecidos (ND) detectados: {conhecidosn}')
+            print(f"Esse padrão é: {resultadotodo}")
+            print(f"RESULTADO NS: {compreensaogeral}")
+            time.sleep(tempo)
+            ciclo += 1
 
-
-Certo: senhora
-
-Gerado: snhraoe
-
-Cada letra tem um valor e é só diminuir o valor da primeira letra gerada pela a certa e ver se está correto
-____________________________________.
-*Em desenvolvimento 
-
-
-Made by Felipe Guerra Rodrigues Athaydes """
