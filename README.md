@@ -784,15 +784,7 @@ Sistema de interligação por ND:
 Cada ND pode cuidar de um carácter e as saídas irão convergir em uma palavra na ordem crescente, cada neurônio vai ter um ID escondido/abstrato que funcionará na ordem exemplo neurônio 1 - 100 na ordem, para impedir erros custará muito processamento mas cada np terá acesso a todos os ND, para não bagunçar tudo ele só pegará uma palavra exemplo: (oi), isso custa 2 ND mas tem 100 ND, como é uma frase pela própria mente humana as palavras são separadas por espaços, ele detectara algo entre 2 espaços e irá corrigir a palavra gerada pelos ND's
 _______________________________.
 Np funcionamento:
-Cada np funciona como uma "via", que conecta todos os np's do código, consequentemente isso afetaria a organização, por isso ele detectara uma coisa presente em toda forma de linguagem da terra os espaços, e as letras entre dois espaços seriam uma palavra, consequentemente cada np organizaria a saída dos np's conectados a ele, cada np também tem as mesmas váriaveis de um ND somente as entradas e os cálculos são diferentes, exemplo:
-
-
-
-Certo: senhora
-
-Gerado: snhraoe
-
-Cada letra tem um valor e é só diminuir o valor da primeira letra gerada pela a certa e ver se está correto
+Np, basicamente é uma porta and, só que as entrdas são as saídas dos nd's
 ____________________________________.
 *Em desenvolvimento 
 
