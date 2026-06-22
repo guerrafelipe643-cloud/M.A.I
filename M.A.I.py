@@ -44,10 +44,10 @@ class ND:
         vn = round(vn)
         if vn == entrada:
             self.mem[entrada] = vn
-            if entrada in self.mem:          # isto sempre será verdade, pode só self.memg[entrada] = vn
+            if entrada in self.mem:         
                 self.memg[entrada] = vn
-            self.vn = vn                     # atualiza o valor do neurônio
-        self.tenta = tenta                   # opcional: guarda quantas tentativas levou
+            self.vn = vn                     
+        self.tenta = tenta                   
 class NP:
     def __init__(self, name):
         self.name = name
