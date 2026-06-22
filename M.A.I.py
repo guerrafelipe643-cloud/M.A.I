@@ -16,7 +16,6 @@
 #   Você deve ter recebido uma cópia da Licença Pública Geral GNU junto com
 #   este programa. Se não, veja <https://gnu.org>.
 # ==============================================================================
-# MAI 0.5 / SISTEMA 
 import random, string
 import time
 class ND:
@@ -110,9 +109,10 @@ while True:
             numerond = int(input("Digite o número de ND's: "))
         except ValueError:
             continue
-        numnp = numerond // num
-        for i in range(numnp):
-            nps.append(NP(f"np.{i}"))
+        if "s" in use:
+            numnp = numerond // num
+            for i in range(numnp):
+                nps.append(NP(f"np.{i}"))
         for i in range(numerond):
             nds.append(ND(f"nd.{i}"))
         ns = NS("NS")
@@ -154,12 +154,12 @@ while True:
                 else:
                     conhecidosn += 1
                 valores_nds.append(nd.vn)
-
-            for i, np in enumerate(nps):
-                inicio = i * num
-                fim = inicio + num
-                ents = tuple(valores_nds[inicio:fim])
-                resultadotodo.append(np.comparar(ents))
+            if "s" in use:
+                for i, np in enumerate(nps):
+                    inicio = i * num
+                    fim = inicio + num
+                    ents = tuple(valores_nds[inicio:fim])
+                    resultadotodo.append(np.comparar(ents))
             compreensaogeral = ns.comparar(tuple(valores_nds))
             fim1 = time.perf_counter_ns()
             print(f"latência total: {fim1-inicio1} ns")
@@ -168,4 +168,3 @@ while True:
             print(f"RESULTADO NS: {compreensaogeral}")
             time.sleep(tempo)
             ciclo += 1
-
