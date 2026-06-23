@@ -1,4 +1,3 @@
-
 # =============================================================================
 #   MAI - Memory Architecture for AI (Arquitetura Modular para IA)
 #   Copyright (C) 2026  Felipe Guerra Rodrigues Athaydes
@@ -22,32 +21,25 @@ class ND:
     def __init__(self, name):
         self.name = name
         self.mem = {}
-        self.memg = {}
-        self.ta = 0.1
         self.vn = 0
-        self.tenta = 0
     def detectar(self, ent):
         if ent in self.mem:
             return self.mem[ent], "Conhecido"
         else:
             return None, "Novo"
     def aprender(self, entrada):
-        tenta = 0
+        ta = 0.1
         vn = self.vn  # começa com o valor atual do neurônio
+        err = vn - entrada
         while True:
-            err = entrada - vn           # recalcula o erro a cada iteração
-            if abs(err) < 1e-2 or tenta > 1e8:   # condição de parada
+            if abs(err) < 1e-2:   
                 break
-            vna = max(-1, min(1, err * self.ta))
+            err = entrada - vn          
+            vna = max(-1, min(1, err * ta))
             vn += vna
-            tenta += 1
         vn = round(vn)
         if vn == entrada:
-            self.mem[entrada] = vn
-            if entrada in self.mem:          # isto sempre será verdade, pode só self.memg[entrada] = vn
-                self.memg[entrada] = vn
-            self.vn = vn                     # atualiza o valor do neurônio
-        self.tenta = tenta                   # opcional: guarda quantas tentativas levou
+            self.mem[entrada] = vn     
 class NP:
     def __init__(self, name):
         self.name = name
@@ -58,19 +50,8 @@ class NP:
         else:
             self.mem[ents] = ents
             return "Novo! e salvo!"
-class NS:
-    def __init__(self, name):
-        self.name = name
-        self.mem = {}
-    def comparar(self, ents):
-        if ents in self.mem:
-            return "Padrão geral: Conhecido"
-        else:
-            self.mem[ents] = ents
-            return "Padrão geral: Novo e aprendido"
-ciclo = 0
+
 while True:
-    
     ciclo = 0
     nds = []
     print("=================:MENU M.A.I:=================")
@@ -115,7 +96,7 @@ while True:
                 nps.append(NP(f"np.{i}"))
         for i in range(numerond):
             nds.append(ND(f"nd.{i}"))
-        ns = NS("NS")
+        ns = NP("NS")
         print(f"{len(nds)} nds criados!")
         resultados = []
         memoriaglobal = []
@@ -134,23 +115,15 @@ while True:
             if len(text) > len(nds):
                 print(f"Muitos caracteres!, o texto tem {len(text)} caracteres, o máximo é {len(nds)}!")
                 continue
-            inicio1 = time.perf_counter_ns()
             for i, char in enumerate(text):
                 if char.isdigit():
                     ent = int(char)
                 else:
                     ent = ord(char)
                 nd = nds[i]
-                inicio = time.perf_counter_ns()
                 valor,status = nd.detectar(ent)
-                fim = time.perf_counter_ns()
-                print(f"latência de detecção: {fim-inicio} ns")
                 if status == "Novo":
-                    inicio2 = time.perf_counter_ns()
                     nd.aprender(ent)
-                    fim2 = time.perf_counter_ns()
-                    print(f"latência de cáculo do {nd.name}: {fim2-inicio2} ns")
-                    print(f"memória atual: {nd.mem}")
                 else:
                     conhecidosn += 1
                 valores_nds.append(nd.vn)
@@ -161,8 +134,6 @@ while True:
                     ents = tuple(valores_nds[inicio:fim])
                     resultadotodo.append(np.comparar(ents))
             compreensaogeral = ns.comparar(tuple(valores_nds))
-            fim1 = time.perf_counter_ns()
-            print(f"latência total: {fim1-inicio1} ns")
             print(f'número de conhecidos (ND) detectados: {conhecidosn}')
             print(f"Esse padrão é: {resultadotodo}")
             print(f"RESULTADO NS: {compreensaogeral}")
