@@ -1,6 +1,6 @@
 // =============================================================================
 //   MAI - Memory Architecture for AI (Arquitetura de memória para IA)
-//  Copyright (C) 2026  Felipe Guerra Rodrigues Athaydes
+//   Copyright (C) 2026  Felipe Guerra Rodrigues Athaydes
 //
 //   Este programa é um software livre: você pode redistribuí-lo e/ou modificá-lo
 //   sob os termos da Licença Pública Geral GNU conforme publicada pela
