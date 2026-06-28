@@ -1,4 +1,4 @@
-// =============================================================================
+// ===============================================================================
 //   MAI - Memory Architecture for AI (Arquitetura de memória para IA)
 //   Copyright (C) 2026  Felipe Guerra Rodrigues Athaydes
 //
@@ -22,6 +22,9 @@
 #include <vector>
 #include <cctype>
 #include <random>
+#include <fstream>
+#include <thread>
+#include <chrono>
 using namespace std;
 class ND{
 public:
@@ -36,12 +39,13 @@ public:
         if (mem.count(ent)){
             saida = ent;
             novo = false;
+            cout << "ND: Conhecido \n";
             return novo;
             
         }
         else{
             novo = true;
-            cout << "Desconhecido";
+            cout << "ND: Desconhecido na entrada: " << ent << "\n";
             return novo;
         }
     }
@@ -69,13 +73,13 @@ public:
     bool comparar(int ent){
         if (mem.count(ent)){
             novo = false;
-            cout << "Conhecido \n";
+            cout << "NP: Conhecido \n";
             return novo;
         }
         else{
             mem[ent] = ent;
             novo = true;
-            cout << "Desconhecido \n";
+            cout << "NP: Desconhecido na entrada: " << ent <<"\n";
             return novo;
         }
     }
@@ -90,13 +94,18 @@ int ent = 0;
 int vn = 0;
 int inicio = 0;
 int fim = 0;
+int z = 0;
+int cvens = 0;
 string dado = "";
 unordered_map<int,int> saida;
 unordered_map<bool,int> saidanp;
-string txt = "";
+string sla;
 vector<int> grupo;
 vector<ND> nds;
 vector<NP> nps;
+string txt;   // acumulador
+string line;  // variável temporária
+ifstream MyReadFile("dados.txt");
 int main(){
         cout << "Digite a quantidade de nds: ";
         cin >> qnd;
@@ -110,12 +119,14 @@ int main(){
         for (int i = 0; i < numnp; i++){
             nps.push_back(NP());
         }
+        nps.push_back(NP());
         while (1){
-            cout << "Digite uma entrada: ";
-            cin >> txt;
-            if (txt.size() > nds.size()){
-                cout << "Digite novamente \n";
-                continue;
+            string txt;   // acumulador
+            string line;
+            ifstream MyReadFile("dados.txt");
+            while (getline(MyReadFile, line)){
+                cout << line << '\n';
+                txt += line; // acumula todas as linhas
             }
             for (int i = 0; i < txt.size(); i++) {
                 char c = txt[i];
@@ -132,17 +143,20 @@ int main(){
                     grupo.push_back(vn);
                 }
                 if ((i + 1) % numnd == 0){
-                    int chave = 0;
+                    long long chave = 0;
                     for(auto x : grupo){
                         chave = chave * 1000 + x;
                     }
-                    bool saidanpt =
-                        nps[b].comparar(chave);
+                    bool saidanpt = nps[b].comparar(chave);
+                    if (saidanpt){
+                        this_thread::sleep_for(chrono::milliseconds(100));
+                    }
                     grupo.clear();
                     b++;
                 }
             }
             b = 0;
+            z = 0;
         }
     return 0;
-}
+} //c++ M.A.I
