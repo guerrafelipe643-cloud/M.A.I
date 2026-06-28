@@ -159,4 +159,4 @@ int main(){
             z = 0;
         }
     return 0;
-} //c++ M.A.I
+} //c++ M.A.I necessita de um arquivo: dados.txt com dados
